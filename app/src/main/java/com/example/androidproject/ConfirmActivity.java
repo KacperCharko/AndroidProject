@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ConfirmActivity extends AppCompatActivity {
 
@@ -34,7 +36,7 @@ public class ConfirmActivity extends AppCompatActivity {
         // correctAnswer= getIntent().getBooleanExtra(MainActivity.KEY_EXTRA_ANSWER,true);
         // showCorrectAnswerButton=findViewById(R.id.show_prompt);
         btnNav=findViewById(R.id.btnNav);
-        imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView2);
         btnCamera=findViewById(R.id.btnCamera);
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +45,16 @@ public class ConfirmActivity extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
+//        Bundle bundle = getIntent().getExtras();
+//        if(bundle.get("task") !=null) {
+//            Log.d("XD", "przeslano");
+//            Task task = (Task)bundle.get("task");
+//            Intent resultIntent=new Intent();
+//            resultIntent.putExtra("task",task);
+//            setResult(RESULT_OK,resultIntent);
+//        }
+
+
 
     }
     @Override

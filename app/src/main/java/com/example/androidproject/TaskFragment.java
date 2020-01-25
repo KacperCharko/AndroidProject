@@ -47,7 +47,7 @@ public class TaskFragment extends Fragment {
         btnConfirm = view.findViewById((R.id.btnConfirm));
         imageView = view.findViewById(R.id.imageView);
 
-        
+
 
 //        btnConfirm.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -59,10 +59,10 @@ public class TaskFragment extends Fragment {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), ConfirmActivity.class);
+                Intent intent=new Intent(getActivity(), ConfirmActivity.class);
 //                boolean correctAnswer=questions[currentIndex].isTrueAnswer();
-//                intent.putExtra(KEY_EXTRA_ANSWER,correctAnswer);
-                startActivityForResult(intent,0);
+                intent.putExtra("task",task);
+                startActivity(intent);
             }
         });
 
@@ -109,7 +109,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap= (Bitmap)data.getExtras().get("data");
-        imageView.setImageBitmap(bitmap);
+        task= (Task)data.getExtras().get("task");
+
     }
 }

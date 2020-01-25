@@ -1,13 +1,20 @@
 package com.example.androidproject;
 
+import android.graphics.Bitmap;
+
+import androidx.annotation.Nullable;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class Task    {
+public class Task  implements Serializable {
     private UUID id;
     private String name;
     private Date date;
     private Boolean done;
+    @Nullable
+    private Bitmap photo;
     public UUID getId() {
         return id;
     }
@@ -18,6 +25,15 @@ public class Task    {
 
     public String getName() {
         return name;
+    }
+
+    @Nullable
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(@Nullable Bitmap photo) {
+        this.photo = photo;
     }
 
     public void setName(String name) {
