@@ -47,6 +47,8 @@ public class TaskFragment extends Fragment {
         btnConfirm = view.findViewById((R.id.btnConfirm));
         imageView = view.findViewById(R.id.imageView);
 
+        
+
 //        btnConfirm.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
