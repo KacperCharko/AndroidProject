@@ -15,8 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidproject.database.Task;
+
 public class ConfirmActivity extends AppCompatActivity {
 
+    private Task task;
     private Button btnNav;
     private Button btnCamera;
     private ImageView imageView;
@@ -45,18 +48,18 @@ public class ConfirmActivity extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
-//        Bundle bundle = getIntent().getExtras();
-//        if(bundle.get("task") !=null) {
-//            Log.d("XD", "przeslano");
-//            Task task = (Task)bundle.get("task");
-//            Intent resultIntent=new Intent();
-//            resultIntent.putExtra("task",task);
-//            setResult(RESULT_OK,resultIntent);
-//        }
+        Bundle bundle = getIntent().getExtras();
+        if(bundle.get("task") !=null) {
+
+             task = (Task)bundle.get("task");
+            Log.d("XD", task.getName());
+        }
 
 
 
     }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
