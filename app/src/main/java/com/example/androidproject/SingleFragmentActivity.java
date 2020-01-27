@@ -14,16 +14,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        Bundle bundle = getIntent().getExtras();
 
-//        if(bundle.get("task_id")!= null)
-//        {
-//            task_id= (int) bundle.get("task_id");
-//            Log.d("xxxxxxxxxxxxxxxxxxxxxxxxx", ""+task_id);
-//            //TODO here get the string stored in the string variable and do
-//            // setText() on userName
-//        }
-//       // bundle.putSerializable("task_id",task_id);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);

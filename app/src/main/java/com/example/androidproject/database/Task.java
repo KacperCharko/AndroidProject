@@ -1,12 +1,14 @@
 package com.example.androidproject.database;
 
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
 
 @Entity(tableName="Task")
@@ -14,24 +16,19 @@ public class Task implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
-    //private Date date;
     private Boolean done;
-
     //private Bitmap photo;
     private double latitude;
 
     private double longitude;
 
-    public Task () {
-        // date = new Date();
-        name = "";
-        done = false;
-    }
-    @Ignore
+
     public Task (String name) {
-        //date = new Date();
+
         this.name = name;
-        done = false;
+        this.latitude=0;
+        this.latitude=0;
+        this.done = false;
     }
 
     public int getId() {
@@ -50,13 +47,6 @@ public class Task implements Serializable {
         this.name = name;
     }
 
-//    public Date getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
 
     public Boolean getDone() {
         return done;
@@ -66,14 +56,6 @@ public class Task implements Serializable {
         this.done = done;
     }
 
-//    @Nullable
-//    public Bitmap getPhoto() {
-//        return photo;
-//    }
-//
-//    public void setPhoto(@Nullable Bitmap photo) {
-//        this.photo = photo;
-//    }
 
     public double getLatitude() {
         return latitude;

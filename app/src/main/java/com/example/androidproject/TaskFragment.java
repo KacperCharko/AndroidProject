@@ -1,4 +1,5 @@
 package com.example.androidproject;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -24,8 +25,12 @@ import com.example.androidproject.database.Task;
 import com.example.androidproject.database.TaskDao;
 import com.example.androidproject.database.TaskDatabase;
 import com.example.androidproject.database.TaskViewModel;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.UUID;
+
+import static android.app.Activity.RESULT_FIRST_USER;
+import static android.app.Activity.RESULT_OK;
 
 public class TaskFragment extends Fragment {
     private static final String ARG_TASK_ID = "";
@@ -33,23 +38,18 @@ public class TaskFragment extends Fragment {
     public static final String EXTRA_EDIT_BOOK_AUTHOR = "EDIT_BOOK_AUTHOR";
     private EditText nameField;
     private Button dateButton;
+    private Button btnNavi;
     private Button btnConfirm;
-    private CheckBox doneCheckBox;
-    private static Task task;
+    private static Task task=null;
     private ImageView imageView;
-    private TaskViewModel taskViewModel;
 
-    private static int task_id;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int taskId = (int) getArguments().getSerializable(ARG_TASK_ID);
-
-
-      //  Log.d("FRAAAAAAAAAAAAA", ARG_TASK_ID + taskId);
-        //task = new Task();
     }
 
     @Nullable
@@ -58,29 +58,37 @@ public class TaskFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_task, container, false);
         nameField = view.findViewById(R.id.task_name);
         dateButton = view.findViewById(R.id.task_date);
-        doneCheckBox = view.findViewById(R.id.task_done);
         btnConfirm = view.findViewById((R.id.btnConfirm));
         imageView = view.findViewById(R.id.imageView);
+        btnNavi = view.findViewById(R.id.btnNavi);
 
 
 
-//        btnConfirm.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(intent,0);
-//            }
-//        });
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
+        btnNavi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), ConfirmActivity.class);
-//                boolean correctAnswer=questions[currentIndex].isTrueAnswer();
-                //intent.putExtra("task",task);
 
-                startActivity(intent);
+
+                startActivityForResult(intent, 1);
             }
         });
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    Intent replyIntent = new Intent();
+                    getActivity().setResult(RESULT_OK, replyIntent);
+                    replyIntent.putExtra("task", task);
+
+                    getActivity().finish();
+
+
+
+               }
+
+            });
+
 
 
         nameField.addTextChangedListener(new TextWatcher() {
@@ -100,39 +108,62 @@ public class TaskFragment extends Fragment {
             }
         });
         nameField.setText(task.getName());
-        //dateButton.setText(task.getDate().toString());
         dateButton.setEnabled(false);
-       // doneCheckBox.setChecked(task.isDone());
-        doneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        if(task.getLatitude()!=0 && task.getLongitude()!=0) {
+            dateButton.setText("" + task.getLatitude() + task.getLongitude());
+            dateButton.setEnabled(true);
+            dateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                task.setDone(isChecked);
-            }
-        });
+                    Intent intent = new Intent(getContext(),MapActivity.class);
+
+                    intent.putExtra("loc", new LatLng(task.getLatitude(),task.getLongitude()));
+
+                    startActivity(intent);
+
+
+
+                }
+
+            });
+        }
+
+
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         return view;
     }
 
-    public static TaskFragment newInstance(int taskId, Task x) {
+    public static TaskFragment newInstance(int taskId, @Nullable Task x) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ARG_TASK_ID, taskId);
-        bundle.putSerializable("ta", taskId);
+
         TaskFragment taskFragment = new TaskFragment();
         taskFragment.setArguments(bundle);
-        task_id = taskId;
+
         task=x;
-       // Log.d("FRAAAAAAAAX", ARG_TASK_ID + taskId);
+
+
         return taskFragment;
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        task= (Task)data.getExtras().get("task");
-//        nameField.setText(task.getName());
-//
-//        Log.d("XD1", task.getName());
-//    }
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    // Check which request it is that we're responding to
+     {
+        // Make sure the request was successful
+        if (resultCode == RESULT_OK) {
+            LatLng latLng= (LatLng) data.getExtras().get("loc");
+
+            dateButton.setText(""+latLng);
+            task.setLatitude(latLng.latitude);
+            task.setLongitude(latLng.longitude);
+
+
+        }
+    }
+}
+
 }

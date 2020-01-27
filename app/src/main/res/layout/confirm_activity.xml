@@ -18,14 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="apart" />
+            android:text="@string/aparat" />
 
         <Button
             android:id="@+id/btnNav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="nawigacja" />
+            android:text="@string/navigation" />
 
 
     </LinearLayout>
@@ -36,6 +36,12 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewX"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+             />
 
         <ImageView
             android:id="@+id/imageView2"

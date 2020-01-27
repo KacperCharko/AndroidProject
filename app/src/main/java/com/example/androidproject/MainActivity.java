@@ -2,8 +2,10 @@ package com.example.androidproject;
 
 
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -21,16 +23,8 @@ public class MainActivity extends SingleFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getIntent().getExtras();
 
-        if(bundle.get("task_id")!= null)
-        {
-         //   task_id= (int) bundle.get("task_id");
-          //  Log.d("xxxxxxxxxxxxxxxxxxxxxxxxx1", ""+EXTRA_EDIT_BOOK_TITLE+"sadas");
 
-            //TODO here get the string stored in the string variable and do
-            // setText() on userName
-        }
     }
 
     @Override
@@ -43,7 +37,11 @@ public class MainActivity extends SingleFragmentActivity {
             Log.d("xxxxxxxxxxxxxxxxxxxxxxxxx1", "."+ task_id.getId());
 
         }
-
+        if (task_id!=null)
         return TaskFragment.newInstance(task_id.getId(),task_id);
+        else
+            return TaskFragment.newInstance(0,null);
     }
+
+
 }

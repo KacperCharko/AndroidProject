@@ -28,6 +28,6 @@ public interface TaskDao {
     @Query("SELECT * FROM Task order by name")
     public LiveData<List<Task>> findAll();
 
-    @Query("SELECT * FROM Task WHERE id LIKE :id")
-    public List<Task> findTaskWithId(String id);
+//    @Query("SELECT * FROM Task WHERE name = :name")
+//    public abstract Task findByName(String name);
 }

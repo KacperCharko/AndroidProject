@@ -40,11 +40,8 @@ public abstract class TaskDatabase extends RoomDatabase {
             super.onOpen(db);
             databaseWriteExecutor.execute(() -> {
                 TaskDao dao = (TaskDao) INSTANCE.taskDao();
-               // dao.deleteAll();
+                //dao.deleteAll();
 
-                //Task task = new Task("The Lord of the Rings");
-               // Log.d("Xxx777777777777777777777777777777777777777x", task.getName());
-               // dao.insert(task);
             });
         }
     };

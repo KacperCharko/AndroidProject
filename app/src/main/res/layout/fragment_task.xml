@@ -37,19 +37,22 @@
         android:textColor="@color/text"
         android:background="@color/colorSecondary"/>
 
-    <CheckBox
-        android:id="@+id/task_done"
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/big_padding"
-        android:buttonTint="@color/colorAccent"
-        android:text="@string/task_done_label"
-        android:textColor="@color/text" />
+        android:layout_height="63dp" />
 
     <Button
         android:id="@+id/btnConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Potwierdz" />
+        android:text="@string/potwierdz" />
+    <Button
+        android:id="@+id/btnNavi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wykorzystajzasob" />
 
     <ImageView
         android:id="@+id/imageView"
