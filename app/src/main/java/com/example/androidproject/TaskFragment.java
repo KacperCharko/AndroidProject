@@ -40,7 +40,7 @@ public class TaskFragment extends Fragment {
     private Button dateButton;
     private Button btnNavi;
     private Button btnConfirm;
-    private static Task task=null;
+    private static Task task;
     private ImageView imageView;
 
 
@@ -68,8 +68,6 @@ public class TaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), ConfirmActivity.class);
-
-
                 startActivityForResult(intent, 1);
             }
         });
@@ -104,14 +102,14 @@ public class TaskFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                task.setName(s.toString());
             }
         });
         nameField.setText(task.getName());
-        dateButton.setEnabled(false);
+        dateButton.setEnabled(true);
         if(task.getLatitude()!=0 && task.getLongitude()!=0) {
             dateButton.setText("" + task.getLatitude() + task.getLongitude());
-            dateButton.setEnabled(true);
+
             dateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -121,9 +119,6 @@ public class TaskFragment extends Fragment {
                     intent.putExtra("loc", new LatLng(task.getLatitude(),task.getLongitude()));
 
                     startActivity(intent);
-
-
-
                 }
 
             });
@@ -137,33 +132,20 @@ public class TaskFragment extends Fragment {
     public static TaskFragment newInstance(int taskId, @Nullable Task x) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ARG_TASK_ID, taskId);
-
         TaskFragment taskFragment = new TaskFragment();
         taskFragment.setArguments(bundle);
-
         task=x;
-
-
         return taskFragment;
     }
 
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-
-    // Check which request it is that we're responding to
-     {
-        // Make sure the request was successful
         if (resultCode == RESULT_OK) {
             LatLng latLng= (LatLng) data.getExtras().get("loc");
-
             dateButton.setText(""+latLng);
             task.setLatitude(latLng.latitude);
             task.setLongitude(latLng.longitude);
-
-
         }
     }
-}
-
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Todo</string>
+    <string name="task">Task</string>
+    <string name="task_name_hint">Hint</string>
+    <string name="task_name_label">Name</string>
+    <string name="task_details_label">Localization</string>
+    <string name="task_done_label">done</string>
+    <string name="task_add_new">New Task</string>
+    <string name="navigation">show on GoogleMap</string>
+    <string name="wykorzystajzasob">Navigation/Camera</string>
+    <string name="potwierdz">Submit</string>
+    <string name="aparat">camera</string>
+</resources>

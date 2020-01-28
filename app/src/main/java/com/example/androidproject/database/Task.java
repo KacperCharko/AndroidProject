@@ -17,9 +17,7 @@ public class Task implements Serializable {
     private int id;
     private String name;
     private Boolean done;
-    //private Bitmap photo;
     private double latitude;
-
     private double longitude;
 
 

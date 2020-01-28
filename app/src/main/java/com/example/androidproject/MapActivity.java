@@ -16,7 +16,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
    // GoogleMap map;
     LatLng location=null;
@@ -29,8 +29,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             if(bundle.get("loc")!= null)
             {
                 location= (LatLng) bundle.get("loc");
-
-
             }
 
 
